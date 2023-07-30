@@ -1,30 +1,152 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="dist/style.css">
+
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Promises in JavaScript</h1>
+			</section>
+			<section>
+				<h2>What is a Promise?</h2>
+				<p>The Promise object represents the eventual completion (or failure) of an asynchronous operation and its
+					resulting value.</p>
+			</section>
+			<section>
+				<h2>Create Promises in JavaScript</h2>
+				<pre><code style="overflow: auto; word-break: break-all;">
+					// Create a Promise
+					const myPromise = new Promise((resolve, reject) => {
+							const randomNumber = Math.random(); // Generate a random number
+					
+							if (randomNumber > 0.5) {
+// If the number is greater than 0.5, the promise is fulfilled
+									resolve(randomNumber); // Pass the random number as the result
+							} else {
+// If the number is less than or equal to 0.5, the promise is rejected
+									reject(new Error("The random number is too low!"));
+							}
+					});
+	</code></pre>
+			</section>
+			</section>
+			<section>
+				<h2>Promise States</h2>
+				<div class="state glowing-border">
+					<p class="state__1">Rejected</p>
+					<p class="state__2">Pending</p>
+					<p class="state__3">Fulfilled</p>
+				</div>
+			</section>
+			<section>
+				<img class='glowing-border' src="images/wait.webp" alt="Promise">
+			</section>
+			<section>
+				<img class='glowing-border' src="images/waitchils.webp" alt="Promise">
+			</section>
+			<section>
+				<h2>Promise Methods</h2>
+				<div class="methods">
+					<p сlass="method" style="opacity: 0;">then()</p>
+					<p сlass="method" style="opacity: 0;">catch()</p>
+					<p сlass="method" style="opacity: 0;">finally()</p>
+				</div>
+			</section>
+			<section>
+				<pre><code class="language-javascript"  style="padding: 25px;">
+							fetch('https://api.example.com/data')
+							.then(response => response.json())
+							.then(data => {
+								// Work with the fetched data here
+								console.log('Data received:', data);
+							})
+							.catch(error => {
+								// Handle any errors during the API call
+								console.error('Error fetching data:', error);
+							})
+							.finally(() => {
+								// Perform cleanup tasks here
+								console.log('API call completed.');
+							});
+				</code></pre>
+			</section>
+			<section>
+				<pre><code class="language-javascript">
+					async Function1()
+						.then(result1 => asyncFunction2(result1))
+						.then(result2 => asyncFunction3(result2))
+						.then(result3 => {
+							// Final result after all three async functions are completed
+						})
+						.catch(error => {
+							// Handle errors from any of the previous promises
+						});
+				</code></pre>
+			</section>
+			<section>
+				<h2>Promise.all()</h2>
+				<pre><code class="language-javascript">
+         const promise1 = fetch('url1');
+         const promise2 = fetch('url2');
+         Promise.all([promise1, promise2])
+           .then(results => {
+        // results contains an array with the fulfilled values of both promises
+            })
+           .catch(error => {
+        // Handle any errors from any of the promises
+           });
+			</code></pre>
+			</section>
+			<section>
+				<h2> Promise.race()</h2>
+				<pre><code>
+					const promise1 = fetch('url1');
+					const promise2 = fetch('url2');
+					Promise.race([promise1, promise2])
+						.then(result => {
+							// result is the value of the first promise to fulfill
+						})
+						.catch(error => {
+							// Handle any errors from the first promise to reject
+						});</code></pre>
+			</section>
+			<section>
+				<div class="promises-methods">
+					<h2 class="center">Other promises-methods</h2>
+					<div>Promise.allSettled()</div>
+					<div>Promise.any()</div>
+					<div>Promise.reject()</div>
+					<div>Promise.resolve()</div>
+				</div>
+				<a class="bottom-link" href="https://javascript.info/promise-api">https://javascript.info/promise-api</a>
+			</section>
+			<section>
+				<h3>Thank you for your attention!</h3>
+				<img class='glowing-border' src="images/async.jpg">
+			</section>
 		</div>
 
 		<script src="dist/reveal.js"></script>
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="dist/script.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -33,8 +155,9 @@
 				hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
 			});
 		</script>
-	</body>
+</body>
+
 </html>
